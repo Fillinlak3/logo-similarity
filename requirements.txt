@@ -1,0 +1,9 @@
+pandas
+pyarrow
+requests
+opencv-python
+imagehash
+Pillow
+scikit-learn
+tqdm
+
