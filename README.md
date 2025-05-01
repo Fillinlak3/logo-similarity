@@ -1,7 +1,7 @@
 # 🖼️ Logo Similarity Project
 
-Welcome to the **Logo Similarity** project — an initiative to intelligently group websites based on the visual similarity of their logos.
-No heavy clustering algorithms like K-Means or DBSCAN involved — just smart image analysis and thoughtful engineering.
+**Logo Similarity** project — an initiative to intelligently group websites based on the visual similarity of their logos.
+No heavyweight ML clustering (like K-Means or DBSCAN) — just efficient perceptual image analysis and hashing.
 
 ---
 
@@ -16,6 +16,15 @@ Logos are a company's visual fingerprint. This project focuses on:
 
 The challenge?
 Making it work **accurately** without relying on classic machine learning clustering methods.
+
+---
+
+
+## 🧠 How It Works
+
+1. **Logo Extraction** — Favicon URLs are inferred from domains and downloaded automatically
+2. **Image Hashing** — Logos are processed (grayscale + resized) and hashed using perceptual hashing (`phash`)
+3. **Similarity Grouping** — Logo hashes are compared using Hamming distance and grouped if below a similarity threshold
 
 ---
 
@@ -39,7 +48,7 @@ logo-similarity/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/logo-similarity.git
+   git clone https://github.com/Fillinlak3/logo-similarity.git
    cd logo-similarity
    ```
 
@@ -49,11 +58,13 @@ logo-similarity/
    .\logosim_env\Scripts\activate    # Windows
    source logosim_env/bin/activate    # Mac/Linux
    ```
+   Or use `batch/activate_venv.bat` for quick execution.
 
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
+   Or use `batch/install_requirements.bat` for quick execution.
 
 4. Run the project:
    ```bash
@@ -82,19 +93,23 @@ logo-similarity/
 - [x] Project structure & setup
 - [x] Virtual environment and scripts
 - [x] Dataset ready to load
-- [ ] Image processing & similarity logic (in progress)
-- [ ] Final grouping output
+- [x] Image processing & similarity logic
+- [x] Final grouping output (into _output/groups.json_)
 
 ---
 
-## 🙌 Contributing
+## 📊 Example Output (groups.json)
 
-Feel free to open issues or submit pull requests if you'd like to help improve or extend this project!
+```json
+[
+  ["nike.com.png", "nikestore.co.uk.png"],
+  ["cocacola.com.png"],
+  ["apple.com.png", "apple-inc.net.png", "macstore.org.png"]
+]
+```
 
 ---
 
 ## 📃 License
 
 This project is developed for educational purposes as part of the Veridion Internship Challenge.
-
-
