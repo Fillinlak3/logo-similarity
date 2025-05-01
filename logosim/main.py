@@ -1,23 +1,14 @@
 # logosim/main.py
 
+from logosim.utils import path_exists, path_is_empty, file_exists
 from logosim.loader import load_logos_data
 from logosim.downloader import download_favicons
 from logosim.processor import process_all_images, get_processed_images_hashes
 from logosim.comparer import group_similar_images
 from sys import exit as _sysexit
-import os
 
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="PIL")
-
-def path_is_empty(path: str) -> bool:
-    return not(os.path.isdir(path) and len(os.listdir(path)) > 0)
-
-def file_exists(path: str) -> bool:
-    return os.path.isfile(path)
-
-def path_exists(path: str) -> bool:
-    return os.path.exists(path)
 
 if __name__ == "__main__":
     # 1. Clean paths.

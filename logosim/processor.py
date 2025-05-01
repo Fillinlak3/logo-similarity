@@ -1,11 +1,11 @@
 # logosim/processor.py
 
-import os
-import json
+from logosim.utils import save_json, file_exists, ensure_dir
 from PIL import Image
 import imagehash
 from tqdm import tqdm
 from shutil import rmtree
+import os
 
 def process_image(image_path: str, hash_size: int = 16) -> Image:
     try:
@@ -33,7 +33,7 @@ def process_all_images(image_dir: str, processed_dir: str, hash_size: int = 16) 
     for filename in tqdm(files, desc="⚙️ Processing images", dynamic_ncols=True):
         file_path = os.path.join(image_dir, filename)
 
-        if os.path.isfile(file_path):
+        if file_exists:
             img = process_image(file_path, hash_size=hash_size)
             if img:
                 images[filename] = img
@@ -48,7 +48,7 @@ def get_processed_images_hashes(processed_images_dir: str, output_dir: str) -> d
     for filename in tqdm(files, desc="⚙️ Getting hashes", dynamic_ncols=True):
         file_path = os.path.join(processed_images_dir, filename)
 
-        if os.path.isfile(file_path):
+        if file_exists:
             hash_value = get_image_hash(file_path)
             if hash_value:
                 image_hashes[filename] = hash_value
@@ -57,7 +57,7 @@ def get_processed_images_hashes(processed_images_dir: str, output_dir: str) -> d
     return image_hashes
 
 def save_processed_images(images: dict, save_dir: str, format: str = "png") -> None:
-    os.makedirs(save_dir, exist_ok=True)
+    ensure_dir(save_dir)
 
     for filename, image in images.items():
         try:
@@ -70,13 +70,12 @@ def save_processed_images(images: dict, save_dir: str, format: str = "png") -> N
 
     print(f"💾 Saved {len(images)} images to {save_dir}")
 
-def save_hashes(hashes: dict, save_path: str) -> None:
-    save_file = os.path.join(save_path, "hashes.json")
-    os.makedirs(os.path.dirname(save_file), exist_ok=True)
+def save_hashes(hashes: dict, save_dir: str) -> None:
+    ensure_dir(save_dir)
+    save_path = os.path.join(save_dir, "hashes.json")
 
-    with open(save_file, "w") as f:
-        json.dump(hashes, f, indent=4)
-    print(f"💾 Hashes saved to {save_file}")
+    save_json(hashes, save_path)
+    print(f"💾 Hashes saved to {save_path}")
 
 if __name__ == "__main__":
     image_dir = "data/raw/"

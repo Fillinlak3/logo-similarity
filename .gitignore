@@ -1,17 +1,27 @@
-# Environment
+# > Environment
 logosim_env/
 
-# Python cache
+# > Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Editor/system files
+# > Editor/system files
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 
-# Output (excludem doar rezultate generate)
+# > Output (exclude results)
 output/
+
+# > Data (keep the table)
+data/**
+
+# Keep the structure of subfolders
+!data/raw/
+!data/processed/
+
+# Keep parquet files
+!data/*.parquet

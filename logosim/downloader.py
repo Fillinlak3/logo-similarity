@@ -1,9 +1,10 @@
 # logosim/downloader.py
 
-import os
+from logosim.utils import ensure_dir
 import requests
 from tqdm import tqdm
 from sys import exit as _sysexit
+import os
 
 def build_favicon_url(domain: str, size: int = 64) -> str:
     return f"https://www.google.com/s2/favicons?sz={size}&domain={domain}"
@@ -20,8 +21,8 @@ def download_image(url: str, save_path: str) -> bool:
         return False
 
 def download_favicons(domains: list[str], save_dir: str, size: int = 64) -> None:
-    os.makedirs(save_dir, exist_ok=True)
-    os.makedirs("output", exist_ok=True)
+    ensure_dir(save_dir)
+    ensure_dir("output")
 
     failed = []
 
