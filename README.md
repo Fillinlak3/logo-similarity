@@ -1,6 +1,6 @@
 # 🖼️ Logo Similarity Project
 
-**Logo Similarity** project — an initiative to intelligently group websites based on the visual similarity of their logos.
+**Logo Similarity** project — an initiative to intelligently group websites based on the visual similarity of their logos.<br>
 No heavyweight ML clustering (like K-Means or DBSCAN) — just efficient perceptual image analysis and hashing.
 
 ---
